@@ -1,17 +1,17 @@
 import React from "react";
 import RestaurantMap from "containers/RestaurantMap";
+import SideMenu from "containers/SideMenu";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setDisplayMode } from "actions/controls";
-//import dcrw from 'dcrw/dcrw';
+import { fetchRestaurants } from "actions/restaurants";
 import "./app.scss";
-//const { getRestaurants } = dcrw.dcRW;
 
 class App extends React.Component {
-  // async componentDidMount() {
-  //   const restaurants = await getRestaurants("LNB86y2b5vgWFQxsyHTu7Od4VRlg4pgZ");
-  //   console.log(restaurants);
-  // }
+  componentDidMount() {
+    const { fetchRestaurants } = this.props;
+    fetchRestaurants();
+  }
 
   render() {
     const { displayMode } = this.props;
@@ -19,6 +19,7 @@ class App extends React.Component {
       <div className={displayMode}>
         <main>
           <RestaurantMap />
+          <SideMenu />
         </main>
       </div>
     );
@@ -32,7 +33,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setDisplayMode
+      setDisplayMode,
+      fetchRestaurants
     },
     dispatch
   );

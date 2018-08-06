@@ -4,26 +4,25 @@ import { connect } from "react-redux";
 //import 'utilities/leaflet-shims';
 import "./RestaurantMap.scss";
 import "leaflet/dist/leaflet.css";
-import { Map, TileLayer } from "react-leaflet";
+import L from "leaflet";
+import { Map, TileLayer, Marker } from "react-leaflet";
+import RestaurantMarker from "components/RestaurantMarker";
 
 class RestaurantMap extends React.Component {
   render() {
+    const { restaurants } = this.props;
+    console.log(restaurants);
     return (
       <div className="RestaurantMap">
-        <Map
-          center={[39.5, -98.35]}
-          zoom={5}
-          attribution={false}
-          onClick={this.handleMapClick}
-        >
+        <Map center={[38.9072, -77.0369]} zoom={10} attribution={false}>
           <TileLayer
             crossOrigin
-            url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png"
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
           />
-          <TileLayer
-            crossOrigin
-            url="https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png"
-          />
+          {restaurants &&
+            restaurants.map(r => {
+              return <RestaurantMarker key={r["openTableID"]} {...r} />;
+            })}
         </Map>
       </div>
     );
@@ -32,6 +31,7 @@ class RestaurantMap extends React.Component {
 
 const mapStateToProps = state => ({
   //displayMode: state.displayMode,
+  restaurants: state.restaurants.restaurants
 });
 
 const mapDispatchToProps = dispatch =>
