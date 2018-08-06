@@ -1,27 +1,24 @@
 import React from "react";
-import DemoComponent from "components/DemoComponent";
+import RestaurantMap from "containers/RestaurantMap";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setDisplayMode } from "actions/controls";
-import { DARK, LIGHT } from "common/constants/theme";
-
+//import dcrw from 'dcrw/dcrw';
 import "./app.scss";
+//const { getRestaurants } = dcrw.dcRW;
 
 class App extends React.Component {
-  handleDisplayModeChange = () => {
-    const { displayMode } = this.props;
-    this.props.setDisplayMode(displayMode === LIGHT ? DARK : LIGHT);
-  };
+  // async componentDidMount() {
+  //   const restaurants = await getRestaurants("LNB86y2b5vgWFQxsyHTu7Od4VRlg4pgZ");
+  //   console.log(restaurants);
+  // }
 
   render() {
     const { displayMode } = this.props;
     return (
       <div className={displayMode}>
         <main>
-          <DemoComponent
-            onClick={this.handleDisplayModeChange}
-            theme={displayMode}
-          />
+          <RestaurantMap />
         </main>
       </div>
     );
