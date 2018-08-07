@@ -1,18 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./RestaurantMarker.scss";
 import L from "leaflet";
 import { Marker, Popup } from "react-leaflet";
 
 class RestaurantMarker extends React.Component {
   render() {
-    const { lat, lon, name, cuisine } = this.props;
+    const { lat, lon, name, cuisine, hovered } = this.props;
     return (
       <Marker
         zIndexOffset={1000}
         position={[lat, lon]}
         icon={L.divIcon({
-          className: `restaurant-icon`,
-          iconSize: [12, 12]
+          className: `RestaurantMarker${hovered ? " hovered" : ""}`,
+          iconSize: hovered ? [20, 20] : [12, 12]
         })}
       >
         <Popup>
@@ -27,5 +28,9 @@ class RestaurantMarker extends React.Component {
     );
   }
 }
+
+RestaurantMarker.propTypes = {
+  hovered: PropTypes.bool.isRequired
+};
 
 export default RestaurantMarker;

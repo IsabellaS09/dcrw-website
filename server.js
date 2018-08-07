@@ -3,6 +3,9 @@ import path from 'path';
 import dcrw from 'dcrw/dcrw';
 import { API_RESTAURANTS } from './common/constants/urls';
 
+const app = express();
+const port = process.env.PORT || 5001;
+
 const { getRestaurants } = dcrw.dcRW;
 
 let restaurants = [];
@@ -17,7 +20,7 @@ restaurants.forEach(r => {
     filteredRestaurants.push(r);
   }
 })
-restaurants = filteredRestaurants;
+restaurants = filteredRestaurants.sort((a, b) => a['name'].localeCompare(b['name']));
 
 const fetchRestaurants = async () => {
   restaurants = await getRestaurants("LNB86y2b5vgWFQxsyHTu7Od4VRlg4pgZ");
@@ -25,9 +28,6 @@ const fetchRestaurants = async () => {
 }
 
 //fetchRestaurants();
-
-const app = express();
-const port = process.env.PORT || 5001;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 

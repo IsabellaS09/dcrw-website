@@ -1,4 +1,4 @@
-import { SET_DISPLAY_MODE } from "../actions/controls";
+import { SET_DISPLAY_MODE, SET_HOVERED_RESTAURANT } from "../actions/controls";
 import { DARK } from "common/constants/theme";
 
 const displayMode = (state = DARK, action) => {
@@ -10,4 +10,13 @@ const displayMode = (state = DARK, action) => {
   }
 };
 
-export { displayMode };
+const hoveredRestaurant = (state = null, action) => {
+  switch (action.type) {
+    case SET_HOVERED_RESTAURANT:
+      return action.payload.hoveredRestaurant;
+    default:
+      return state;
+  }
+};
+
+export { displayMode, hoveredRestaurant };
