@@ -7,4 +7,9 @@
     .leaflet-control-attribution {
         display: none;
     }
+    .leaflet-control-zoom {
+        position: fixed;
+        top: 0px;
+        right: 12px;
+    }
 }

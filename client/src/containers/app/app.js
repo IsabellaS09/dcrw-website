@@ -1,6 +1,7 @@
 import React from "react";
 import RestaurantMap from "containers/RestaurantMap";
 import SideMenu from "containers/SideMenu";
+import Filters from "containers/Filters";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setDisplayMode } from "actions/controls";
@@ -20,6 +21,7 @@ class App extends React.Component {
         <main>
           <RestaurantMap />
           <SideMenu />
+          <Filters />
         </main>
       </div>
     );

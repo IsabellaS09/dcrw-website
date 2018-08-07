@@ -1,5 +1,18 @@
-import { SET_DISPLAY_MODE, SET_HOVERED_RESTAURANT } from "../actions/controls";
+import {
+  SET_DISPLAY_MODE,
+  SET_HOVERED_RESTAURANT,
+  SET_FILTERS
+} from "../actions/controls";
 import { DARK } from "common/constants/theme";
+import {
+  BRUNCH,
+  LUNCH,
+  DINNER,
+  DOLLAR1,
+  DOLLAR2,
+  DOLLAR3,
+  DOLLAR4
+} from "common/constants/properties";
 
 const displayMode = (state = DARK, action) => {
   switch (action.type) {
@@ -18,5 +31,18 @@ const hoveredRestaurant = (state = null, action) => {
       return state;
   }
 };
+const initialFilterState = {
+  mealTime: [BRUNCH, LUNCH, DINNER],
+  price: [DOLLAR1, DOLLAR2, DOLLAR3, DOLLAR4]
+};
 
-export { displayMode, hoveredRestaurant };
+const filters = (state = initialFilterState, action) => {
+  switch (action.type) {
+    case SET_FILTERS:
+      return action.payload.filters;
+    default:
+      return state;
+  }
+};
+
+export { displayMode, hoveredRestaurant, filters };

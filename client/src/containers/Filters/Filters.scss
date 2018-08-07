@@ -1,0 +1,49 @@
+.Filters {
+    position: fixed;
+    top: 12px;
+    right: 200px;
+    height: 40px;
+    width: 200px;
+    color: red;
+    z-index: 1000;
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+
+    .filter-container {
+        height: 24px;
+        line-height: 24px;
+        border: 1px solid red;
+        border-radius: 5px;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        width: 250px;
+        background: white;
+        &.time-filter {
+            .filter {
+                width: 33%;
+            }
+        }
+        .filter {
+            background-color: white;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            text-align: center;
+            border-right: 1px solid red;
+            width: 25%;
+            &:hover {
+                background-color: rgba(255, 0, 0, 0.1);
+            }
+            &:last-child {
+                border-right: 0px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            &:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+        }
+    }
+}
