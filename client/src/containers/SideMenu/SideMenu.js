@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getRestaurantID } from "utilities/helpers";
 import { setHoveredRestaurant } from "actions/controls";
+import ListItem from "components/ListItem";
 import "./SideMenu.scss";
 
 class SideMenu extends React.Component {
@@ -15,7 +16,6 @@ class SideMenu extends React.Component {
       <div className="SideMenu">
         {restaurants &&
           restaurants.map(r => {
-            const { name } = r;
             const id = getRestaurantID(r);
             return (
               <div
@@ -23,7 +23,7 @@ class SideMenu extends React.Component {
                 key={id}
                 className="list-item"
               >
-                {name}
+                <ListItem {...r} />
               </div>
             );
           })}

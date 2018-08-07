@@ -1,13 +1,13 @@
 .SideMenu {
     width: 300px;
     height: 100vh;
-    float: right;
-    border-left: 1px solid lightgrey;
+    float: left;
+    border-right: 1px solid lightgrey;
     padding: 12px;
 }
 
 .RestaurantMap {
     width: calc(100vw - 300px);
     height: 100vh;
-    float: left;
+    float: right;
 }

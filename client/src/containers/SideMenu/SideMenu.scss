@@ -2,12 +2,10 @@
     overflow-y: auto;
     .list-item {
         &:nth-child(even) {
-            background: rgba(42, 82, 190, 0.1);
-            min-height: 20px;
-
+            background: rgba(43, 43, 43, 0.1);
         }
         &:hover {
-            background: rgba(42, 82, 190, 0.5);
+            background: rgba(43, 43, 43, 0.2);
         }
     }
 }
