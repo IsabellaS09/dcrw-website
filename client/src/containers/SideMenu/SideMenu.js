@@ -39,41 +39,10 @@ class SideMenu extends React.Component {
 
   render() {
     const { restaurants, filteredRestaurants } = this.props;
-    var restaurantsToMap = filteredRestaurants ? filteredRestaurants : restaurants; 
     const { sort } = this.state;
-    const priceRangeMap = {
-      $: "DOLLAR1",
-      $$: "DOLLAR2",
-      $$$: "DOLLAR3",
-      $$$$: "DOLLAR4"
-    };
-    console.log(filters);
-    var filtered = [];
-    if (restaurants) {
-      var filtered = restaurants.filter(r => {
-        var toReturn;
-        if (
-          filters.price &&
-          filters.price.indexOf(priceRangeMap[r.priceRange]) > -1
-        ) {
-          toReturn = true;
-        }
-        var meal;
-        if (filters.mealTime) {
-          if (filters.mealTime.indexOf("brunch") > -1) {
-            meal = true;
-          }
-          if (filters.mealTime.indexOf("lunch") > -1) {
-            meal = true;
-          }
-          if (filters.mealTime.indexOf("dinner") > -1) {
-            meal = true;
-          }
-        }
-        return toReturn && meal;
-      });
-    }
-
+    var restaurantsToMap = filteredRestaurants
+      ? filteredRestaurants
+      : restaurants;
     return (
       <div className="SideMenu">
         <div className="header">
