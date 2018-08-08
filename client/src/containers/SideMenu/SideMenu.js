@@ -11,11 +11,44 @@ class SideMenu extends React.Component {
     this.props.setHoveredRestaurant(id);
   };
   render() {
-    const { restaurants } = this.props;
+    const { restaurants, filters } = this.props;
+    const priceRangeMap = {
+      $: "DOLLAR1",
+      $$: "DOLLAR2",
+      $$$: "DOLLAR3",
+      $$$$: "DOLLAR4"
+    };
+    console.log(filters);
+    var filtered = [];
+    if (restaurants) {
+      var filtered = restaurants.filter(r => {
+        var toReturn;
+        if (
+          filters.price &&
+          filters.price.indexOf(priceRangeMap[r.priceRange]) > -1
+        ) {
+          toReturn = true;
+        }
+        var meal;
+        if (filters.mealTime) {
+          if (filters.mealTime.indexOf("brunch") > -1) {
+            meal = true;
+          }
+          if (filters.mealTime.indexOf("lunch") > -1) {
+            meal = true;
+          }
+          if (filters.mealTime.indexOf("dinner") > -1) {
+            meal = true;
+          }
+        }
+        return toReturn && meal;
+      });
+    }
+
     return (
       <div className="SideMenu">
         {restaurants &&
-          restaurants.map(r => {
+          filtered.map(r => {
             const id = getRestaurantID(r);
             return (
               <div
@@ -32,7 +65,8 @@ class SideMenu extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  restaurants: state.restaurants.restaurants
+  restaurants: state.restaurants.restaurants,
+  filters: state.filters
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

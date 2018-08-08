@@ -8,7 +8,32 @@ import MaterialIcon from "material-icons-react";
 
 class Filters extends React.Component {
   handleFilterChange = (filterType, value) => {
-    console.log(filterType, value);
+    var tempFilters = {};
+    if (this.props.filters[filterType]) {
+      var ind = this.props.filters[filterType].indexOf(value);
+      if (ind > -1) {
+        this.props.filters[filterType].splice(ind, 1);
+        tempFilters = this.props.filters;
+      } else {
+        tempFilters[filterType] = [value];
+      }
+    } else {
+      tempFilters[filterType] = [value];
+    }
+    this.props.setFilters(tempFilters);
+  };
+  isSelected = (filterType, value) => {
+    var className = `filter `;
+    if (
+      this.props.filters[filterType] &&
+      this.props.filters[filterType].indexOf(value) > -1
+    ) {
+      className += "selected";
+    }
+    return className;
+  };
+  resetFilters = () => {
+    this.props.setFilters({});
   };
   render() {
     const { restaurants } = this.props;
@@ -31,15 +56,55 @@ class Filters extends React.Component {
             value={0}
           /> */}
         <div className="filter-container price-filter">
-          <div className={`filter`}>$</div>
-          <div className={`filter`}>$$</div>
-          <div className={`filter`}>$$$</div>
-          <div className={`filter`}>$$$$</div>
+          <div
+            className={`${this.isSelected("price", "DOLLAR1")}`}
+            onClick={() => this.handleFilterChange("price", "DOLLAR1")}
+          >
+            $
+          </div>
+          <div
+            className={`${this.isSelected("price", "DOLLAR2")}`}
+            onClick={() => this.handleFilterChange("price", "DOLLAR2")}
+          >
+            $$
+          </div>
+          <div
+            className={`${this.isSelected("price", "DOLLAR3")}`}
+            onClick={() => this.handleFilterChange("price", "DOLLAR3")}
+          >
+            $$$
+          </div>
+          <div
+            className={`${this.isSelected("price", "DOLLAR4")}`}
+            onClick={() => this.handleFilterChange("price", "DOLLAR4")}
+          >
+            $$$$
+          </div>
         </div>
         <div className="filter-container time-filter">
-          <div className={`filter`}>Brunch</div>
-          <div className={`filter`}>Lunch</div>
-          <div className={`filter`}>Dinner</div>
+          <div
+            className={`${this.isSelected("mealTime", "brunch")}`}
+            onClick={() => this.handleFilterChange("mealTime", "brunch")}
+          >
+            Brunch
+          </div>
+          <div
+            className={`${this.isSelected("mealTime", "lunch")}`}
+            onClick={() => this.handleFilterChange("mealTime", "lunch")}
+          >
+            Lunch
+          </div>
+          <div
+            className={`${this.isSelected("mealTime", "dinner")}`}
+            onClick={() => this.handleFilterChange("mealTime", "dinner")}
+          >
+            Dinner
+          </div>
+        </div>
+        <div className="filter-container reset-filter">
+          <div className={`filter`} onClick={() => this.resetFilters()}>
+            Clear Filters
+          </div>
         </div>
       </div>
     );

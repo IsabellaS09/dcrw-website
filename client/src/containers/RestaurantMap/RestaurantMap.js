@@ -10,7 +10,38 @@ import RestaurantMarker from "components/RestaurantMarker";
 
 class RestaurantMap extends React.Component {
   render() {
-    const { restaurants, hoveredRestaurant } = this.props;
+    const { restaurants, hoveredRestaurant, filters } = this.props;
+    const priceRangeMap = {
+      $: "DOLLAR1",
+      $$: "DOLLAR2",
+      $$$: "DOLLAR3",
+      $$$$: "DOLLAR4"
+    };
+    var filtered = [];
+    if (restaurants) {
+      var filtered = restaurants.filter(r => {
+        var toReturn;
+        if (
+          filters.price &&
+          filters.price.indexOf(priceRangeMap[r.priceRange]) > -1
+        ) {
+          toReturn = true;
+        }
+        var meal;
+        if (filters.mealTime) {
+          if (filters.mealTime.indexOf("brunch") > -1) {
+            meal = true;
+          }
+          if (filters.mealTime.indexOf("lunch") > -1) {
+            meal = true;
+          }
+          if (filters.mealTime.indexOf("dinner") > -1) {
+            meal = true;
+          }
+        }
+        return toReturn && meal;
+      });
+    }
     return (
       <div className="RestaurantMap">
         <Map center={[38.9072, -77.0369]} zoom={10} attribution={false}>
@@ -38,7 +69,8 @@ class RestaurantMap extends React.Component {
 const mapStateToProps = state => ({
   //displayMode: state.displayMode,
   restaurants: state.restaurants.restaurants,
-  hoveredRestaurant: state.hoveredRestaurant
+  hoveredRestaurant: state.hoveredRestaurant,
+  filters: state.filters
 });
 
 const mapDispatchToProps = dispatch =>
