@@ -1,5 +1,10 @@
 .SideMenu {
     overflow-y: auto;
+    .header {
+    	display: flex;
+    	width: 100%;
+    	justify-content: space-between;
+    }
     .list-item {
         &:nth-child(even) {
             background: rgba(43, 43, 43, 0.1);

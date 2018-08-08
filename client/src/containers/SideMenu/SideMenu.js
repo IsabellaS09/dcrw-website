@@ -6,12 +6,36 @@ import { setHoveredRestaurant } from "actions/controls";
 import ListItem from "components/ListItem";
 import "./SideMenu.scss";
 
+const NAME = "name";
+const RATING = "yelpRating";
+const PRICE = "priceRange";
+
 class SideMenu extends React.Component {
+  state = {
+    sort: NAME,
+    desc: true
+  };
+
   handleRestaurantMouseOver = id => {
     this.props.setHoveredRestaurant(id);
   };
+
+  handleSort = sort => {
+    this.setState({ sort });
+  };
+
+  compareRestaurants = (a, b, sort, desc) => {
+    if (isNaN(a[sort]) || isNaN(b[sort])) {
+      return a[sort].localeCompare(b[sort]);
+    } else {
+      console.log("number");
+      return a[sort] - b[sort];
+    }
+  };
+
   render() {
     const { restaurants, filters } = this.props;
+    const { sort } = this.state;
     const priceRangeMap = {
       $: "DOLLAR1",
       $$: "DOLLAR2",
@@ -47,19 +71,32 @@ class SideMenu extends React.Component {
 
     return (
       <div className="SideMenu">
+        <div className="header">
+          <div className="sort" onClick={() => this.handleSort(NAME)}>
+            Name
+          </div>
+          <div className="sort" onClick={() => this.handleSort(RATING)}>
+            Rating
+          </div>
+          <div className="sort" onClick={() => this.handleSort(PRICE)}>
+            Price
+          </div>
+        </div>
         {restaurants &&
-          filtered.map(r => {
-            const id = getRestaurantID(r);
-            return (
-              <div
-                onMouseOver={() => this.handleRestaurantMouseOver(id)}
-                key={id}
-                className="list-item"
-              >
-                <ListItem {...r} />
-              </div>
-            );
-          })}
+          restaurants
+            .sort((a, b) => this.compareRestaurants(a, b, sort))
+            .map(r => {
+              const id = getRestaurantID(r);
+              return (
+                <div
+                  onMouseOver={() => this.handleRestaurantMouseOver(id)}
+                  key={id}
+                  className="list-item"
+                >
+                  <ListItem {...r} />
+                </div>
+              );
+            })}
       </div>
     );
   }
