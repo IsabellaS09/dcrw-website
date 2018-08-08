@@ -1,7 +1,8 @@
 import {
   SET_DISPLAY_MODE,
   SET_HOVERED_RESTAURANT,
-  SET_FILTERS
+  SET_FILTERS,
+  SET_FILTERED_RESTAURANTS
 } from "../actions/controls";
 import { DARK } from "common/constants/theme";
 import {
@@ -45,4 +46,13 @@ const filters = (state = initialFilterState, action) => {
   }
 };
 
-export { displayMode, hoveredRestaurant, filters };
+const filteredRestaurants = (state = null, action) => {
+  switch (action.type) {
+    case SET_FILTERED_RESTAURANTS:
+      return action.payload.filteredRestaurants;
+    default:
+      return state;
+  }
+};
+
+export { displayMode, hoveredRestaurant, filters, filteredRestaurants };

@@ -2,7 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getRestaurantID } from "utilities/helpers";
-import { setHoveredRestaurant } from "actions/controls";
+import { setHoveredRestaurant, setFilteredRestaurants } from "actions/controls";
 import ListItem from "components/ListItem";
 import "./SideMenu.scss";
 
@@ -131,6 +131,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      setFilteredRestaurants,
       setHoveredRestaurant
     },
     dispatch

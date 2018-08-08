@@ -2,12 +2,13 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import "./Filters.scss";
-import { setFilters } from "actions/controls";
+import { setFilters, setFilteredRestaurants } from "actions/controls";
 import StarRatingComponent from "react-star-rating-component";
 import MaterialIcon from "material-icons-react";
 
 class Filters extends React.Component {
   handleFilterChange = (filterType, value) => {
+    const { restaurants } = this.props;
     var tempFilters = {};
     if (this.props.filters[filterType]) {
       var ind = this.props.filters[filterType].indexOf(value);
@@ -19,6 +20,38 @@ class Filters extends React.Component {
       }
     } else {
       tempFilters[filterType] = [value];
+    }
+    const priceRangeMap = {
+      $: "DOLLAR1",
+      $$: "DOLLAR2",
+      $$$: "DOLLAR3",
+      $$$$: "DOLLAR4"
+    };
+    var filtered = [];
+    if (restaurants) {
+      filtered = restaurants.filter(r => {
+        var toReturn;
+        if (
+          tempFilters.price &&
+          tempFilters.price.indexOf(priceRangeMap[r.priceRange]) > -1
+        ) {
+          toReturn = true;
+        }
+        var meal;
+        if (tempFilters.mealTime) {
+          if (tempFilters.mealTime.indexOf("brunch") > -1) {
+            meal = true;
+          }
+          if (tempFilters.mealTime.indexOf("lunch") > -1) {
+            meal = true;
+          }
+          if (tempFilters.mealTime.indexOf("dinner") > -1) {
+            meal = true;
+          }
+        }
+        return toReturn && meal;
+      });
+      this.props.setFilteredRestaurants(filtered);
     }
     this.props.setFilters(tempFilters);
   };
@@ -112,7 +145,8 @@ class Filters extends React.Component {
 }
 const mapStateToProps = state => ({
   restaurants: state.restaurants.restaurants,
-  filters: state.filters
+  filters: state.filters,
+  filteredRestaurants: state.filteredRestaurants
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
