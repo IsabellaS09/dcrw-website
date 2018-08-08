@@ -38,7 +38,8 @@ class SideMenu extends React.Component {
   };
 
   render() {
-    const { restaurants, filters } = this.props;
+    const { restaurants, filteredRestaurants } = this.props;
+    var restaurantsToMap = filteredRestaurants ? filteredRestaurants : restaurants; 
     const { sort } = this.state;
     const priceRangeMap = {
       $: "DOLLAR1",
@@ -103,8 +104,8 @@ class SideMenu extends React.Component {
           <div className="slider" />
         </div>
         <div className="restaurants-list">
-          {restaurants &&
-            restaurants
+          {restaurantsToMap &&
+            restaurantsToMap
               .sort((a, b) => this.compareRestaurants(a, b, sort))
               .map(r => {
                 const id = getRestaurantID(r);
@@ -125,7 +126,7 @@ class SideMenu extends React.Component {
 }
 const mapStateToProps = state => ({
   restaurants: state.restaurants.restaurants,
-  filters: state.filters
+  filteredRestaurants: state.filteredRestaurants
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
