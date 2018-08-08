@@ -9,6 +9,7 @@ import "./SideMenu.scss";
 const NAME = "name";
 const RATING = "yelpRating";
 const PRICE = "priceRange";
+const DISTANCE = "distance";
 
 class SideMenu extends React.Component {
   state = {
@@ -25,6 +26,9 @@ class SideMenu extends React.Component {
   };
 
   compareRestaurants = (a, b, sort, desc) => {
+    if (typeof a[sort] === "undefined" || typeof b[sort] === "undefined") {
+      return 0;
+    }
     if (isNaN(a[sort]) || isNaN(b[sort])) {
       return a[sort].localeCompare(b[sort]);
     } else {
@@ -72,31 +76,49 @@ class SideMenu extends React.Component {
     return (
       <div className="SideMenu">
         <div className="header">
-          <div className="sort" onClick={() => this.handleSort(NAME)}>
+          <div
+            className={`sort name${sort === NAME ? " current" : ""}`}
+            onClick={() => this.handleSort(NAME)}
+          >
             Name
           </div>
-          <div className="sort" onClick={() => this.handleSort(RATING)}>
+          <div
+            className={`sort rating${sort === RATING ? " current" : ""}`}
+            onClick={() => this.handleSort(RATING)}
+          >
             Rating
           </div>
-          <div className="sort" onClick={() => this.handleSort(PRICE)}>
+          <div
+            className={`sort price${sort === PRICE ? " current" : ""}`}
+            onClick={() => this.handleSort(PRICE)}
+          >
             Price
           </div>
+          <div
+            className={`sort distance${sort === DISTANCE ? " current" : ""}`}
+            onClick={() => this.handleSort(DISTANCE)}
+          >
+            Distance
+          </div>
+          <div className="slider" />
         </div>
-        {restaurants &&
-          restaurants
-            .sort((a, b) => this.compareRestaurants(a, b, sort))
-            .map(r => {
-              const id = getRestaurantID(r);
-              return (
-                <div
-                  onMouseOver={() => this.handleRestaurantMouseOver(id)}
-                  key={id}
-                  className="list-item"
-                >
-                  <ListItem {...r} />
-                </div>
-              );
-            })}
+        <div className="restaurants-list">
+          {restaurants &&
+            restaurants
+              .sort((a, b) => this.compareRestaurants(a, b, sort))
+              .map(r => {
+                const id = getRestaurantID(r);
+                return (
+                  <div
+                    onMouseOver={() => this.handleRestaurantMouseOver(id)}
+                    key={id}
+                    className="list-item"
+                  >
+                    <ListItem {...r} />
+                  </div>
+                );
+              })}
+        </div>
       </div>
     );
   }

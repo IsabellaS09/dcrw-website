@@ -1,16 +1,74 @@
 .SideMenu {
     overflow-y: auto;
     .header {
-    	display: flex;
+      display: flex;
+      position: relative;
     	width: 100%;
-    	justify-content: space-between;
+      justify-content: space-between;
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
+      margin-left: -6px;
     }
+    .restaurants-list {
+      height: calc(100vh - 54px);
+      overflow-y: auto;
+    }
+    .sort {
+      text-align: center;
+      width: 25%;
+      z-index: 1;
+      transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      cursor: pointer;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 10px;
+      &:hover {
+        color: white;
+      }
+      &.current {
+        color: white;
+        background-color: rgba(255, 0, 0, 0.8);
+      }
+    }
+
+    .slider {
+      position: absolute;
+      height: 3px;
+      width: 25%;
+      margin: 0;
+      z-index: 0;
+      background-color: red;
+      height: 20px;
+      border-radius: 10px;
+      transition-property: transform;
+      transition: .3s ease-in-out;
+   }
+
+  .name.current ~ .slider,
+    div.name:hover ~ .slider {
+    margin-left: 0%;
+  }
+    
+    .rating.current ~ .slider,
+    div.rating:hover ~ .slider {
+        margin-left: 25%;
+    }
+    
+    .price.current ~ .slider,
+    div.price:hover ~ .slider {
+      margin-left: 50%;
+    }
+
+    .distance.current ~ .slider,
+    div.distance:hover ~ .slider {
+    margin-left: 75%;
+    }
+
     .list-item {
-        &:nth-child(even) {
-            background: rgba(43, 43, 43, 0.1);
-        }
+        border-top: 1px solid #EFF6EE;
         &:hover {
-            background: rgba(43, 43, 43, 0.2);
+            background: #EFF6EE
         }
     }
 }
