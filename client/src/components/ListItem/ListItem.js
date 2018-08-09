@@ -28,8 +28,8 @@ class ListItem extends React.Component {
         </div>
         <div className="info-container">
           <div>
-            <div class="description">{description}</div>
-            <div class="otherInfo">
+            <div className="description">{description}</div>
+            <div className="otherInfo">
               <div className="price">{priceRange}</div>
               <StarRatingComponent
                 name="rate2"
@@ -63,9 +63,14 @@ class ListItem extends React.Component {
               </div>
             </div>
           </div>
-          <div class="cuisine header">
+          <div className="cuisine header">
             {cuisine.map(c => {
-              return <div className={`sort`}> {c} </div>;
+              return (
+                <div key={c} className={`sort`}>
+                  {" "}
+                  {c}{" "}
+                </div>
+              );
             })}
           </div>
         </div>
