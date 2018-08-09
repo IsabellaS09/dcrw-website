@@ -3,6 +3,7 @@
     display: inline-block;
     margin-top: 5px;
     margin-left: 12px;
+    padding-bottom: 8px;
 
     .name {
         font-size: 18px;
@@ -46,11 +47,26 @@
         height: 100px;
         width: 100%;
         float: left;
+        > div {
+            height: 73px;
+            width: 100%;
+            .description{
+                display: inline-block;
+                height: 75px;
+                overflow: scroll;
+                width: 175px;
+            }
+            .otherInfo{
+
+            }
+        }
+
         .cuisine{
             display: inline-block;
         }
         .otherInfo{
             display: inline-block;
+            vertical-align: top;
         }
     }
     .logo {
@@ -62,4 +78,28 @@
         //border: 1px solid lightgrey;
         float: left;
     }
+    .cuisine.header{
+        margin-top:8px;
+        display: flex;
+        justify-content: end;
+        width: 280px;
+        overflow-x: scroll;
+        padding-left: 0px;
+        .sort{
+            display: inline-block;
+            word-wrap: normal;
+            white-space: nowrap;
+            margin-right: 8px;
+            width: unset;
+            color: white;
+            height: 22px;
+            padding: 4px;
+            line-height: 15px;
+            background-color: #66666E;
+            &:hover{
+                background-color: red;
+            }
+        }
+    }
+
 }
