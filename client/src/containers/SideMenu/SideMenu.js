@@ -45,32 +45,34 @@ class SideMenu extends React.Component {
       : restaurants;
     return (
       <div className="SideMenu">
-        <div className="header">
-          <div
-            className={`sort name${sort === NAME ? " current" : ""}`}
-            onClick={() => this.handleSort(NAME)}
-          >
-            Name
+        <div className="header-wrapper">
+          <div className="header">
+            <div
+              className={`sort name${sort === NAME ? " current" : ""}`}
+              onClick={() => this.handleSort(NAME)}
+            >
+              Name
+            </div>
+            <div
+              className={`sort rating${sort === RATING ? " current" : ""}`}
+              onClick={() => this.handleSort(RATING)}
+            >
+              Rating
+            </div>
+            <div
+              className={`sort price${sort === PRICE ? " current" : ""}`}
+              onClick={() => this.handleSort(PRICE)}
+            >
+              Price
+            </div>
+            <div
+              className={`sort distance${sort === DISTANCE ? " current" : ""}`}
+              onClick={() => this.handleSort(DISTANCE)}
+            >
+              Distance
+            </div>
+            <div className="slider" />
           </div>
-          <div
-            className={`sort rating${sort === RATING ? " current" : ""}`}
-            onClick={() => this.handleSort(RATING)}
-          >
-            Rating
-          </div>
-          <div
-            className={`sort price${sort === PRICE ? " current" : ""}`}
-            onClick={() => this.handleSort(PRICE)}
-          >
-            Price
-          </div>
-          <div
-            className={`sort distance${sort === DISTANCE ? " current" : ""}`}
-            onClick={() => this.handleSort(DISTANCE)}
-          >
-            Distance
-          </div>
-          <div className="slider" />
         </div>
         <div className="restaurants-list">
           {restaurantsToMap &&

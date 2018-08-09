@@ -1,5 +1,11 @@
 .SideMenu {
     overflow-y: auto;
+    .header-wrapper {
+      padding: 0px 5px 0px 5px;
+    }
+    .header-wrapper {
+      border-bottom: 1px solid #EFF6EE;
+    }
     .header {
       display: flex;
       position: relative;
@@ -8,8 +14,6 @@
       height: 30px;
       line-height: 30px;
       font-size: 12px;
-      margin-left: -6px;
-      padding-left:12px;
     }
     .restaurants-list {
       height: calc(100vh - 54px);
@@ -68,6 +72,9 @@
 
     .list-item {
         border-top: 1px solid #EFF6EE;
+        &:first-of-type {
+          border-top: 0px;
+        }
         &:hover {
             background: #EFF6EE
         }
