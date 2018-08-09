@@ -14,21 +14,16 @@ class ListItem extends React.Component {
       brunch,
       lunch,
       dinner,
-      cuisine,
-      description
+      cuisine
     } = this.props;
     return (
       <div className="ListItem">
         <div>
-          <div
-            className="logo"
-            style={{ backgroundImage: `url(${logoURL})` }}
-          />
           <div className="name">{name}</div>
         </div>
+        <div className="logo" style={{ backgroundImage: `url(${logoURL})` }} />
         <div className="info-container">
           <div>
-            <div className="description">{description}</div>
             <div className="otherInfo">
               <div className="price">{priceRange}</div>
               <StarRatingComponent
@@ -40,13 +35,13 @@ class ListItem extends React.Component {
                   return (
                     <MaterialIcon
                       icon={isColored ? "star" : "star_border"}
-                      color="red"
+                      color="#1C3144"
                       size={16}
                     />
                   );
                 }}
                 renderStarIconHalf={() => (
-                  <MaterialIcon icon="star_half" color="red" size={16} />
+                  <MaterialIcon icon="star_half" color="#1C3144" size={16} />
                 )}
                 value={yelpRating}
               />
@@ -63,10 +58,10 @@ class ListItem extends React.Component {
               </div>
             </div>
           </div>
-          <div className="cuisine header">
+          <div className="cuisine">
             {cuisine.map(c => {
               return (
-                <div key={c} className={`sort`}>
+                <div key={c} className={`cuisine-tag`}>
                   {" "}
                   {c}{" "}
                 </div>

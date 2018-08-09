@@ -1,24 +1,16 @@
 .ListItem {
     padding: 5px;
     display: inline-block;
-    margin-top: 5px;
-    margin-left: 12px;
-    padding-bottom: 8px;
-
+    width: 100%;
     .name {
         font-size: 18px;
         line-height: 50px;
-        margin-left: 8px;
         font-weight: bold;
-        margin-bottom: 5px;
-        margin-left: 8px;
         display: inline-block;
-        width:150px;
         overflow: auto;
-        white-space: nowrap;
     }
     .price {
-        color: red;
+        color: #1C3144;
         font-size: 14px;
         height: 20px;
         font-weight: bold;
@@ -44,23 +36,8 @@
         }
     }
     .info-container {
-        height: 100px;
         width: 100%;
         float: left;
-        > div {
-            height: 73px;
-            width: 100%;
-            .description{
-                display: inline-block;
-                height: 75px;
-                overflow: scroll;
-                width: 175px;
-            }
-            .otherInfo{
-
-            }
-        }
-
         .cuisine{
             display: inline-block;
         }
@@ -78,27 +55,21 @@
         //border: 1px solid lightgrey;
         float: left;
     }
-    .cuisine.header{
-        margin-top:8px;
+    .cuisine {
         display: flex;
-        justify-content: end;
-        width: 280px;
-        overflow-x: scroll;
-        padding-left: 0px;
-        .sort{
+        justify-content: space-between;
+        width: 100%;
+        .cuisine-tag{
             display: inline-block;
             word-wrap: normal;
             white-space: nowrap;
-            margin-right: 8px;
             width: unset;
             color: white;
             height: 22px;
-            padding: 4px;
-            line-height: 15px;
-            background-color: #66666E;
-            &:hover{
-                background-color: red;
-            }
+            padding: 0px 4px 0px 4px;
+            margin: 5px 5px 5px 0px;
+            line-height: 22px;
+            background-color: #1C3144;
         }
     }
 
