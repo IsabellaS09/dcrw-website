@@ -9,14 +9,18 @@ import MaterialIcon from "material-icons-react";
 class Filters extends React.Component {
   handleFilterChange = (filterType, value) => {
     const { restaurants } = this.props;
-    var tempFilters = {};
+    var tempFilters = this.props.filters ? this.props.filters : {};
     if (this.props.filters[filterType]) {
       var ind = this.props.filters[filterType].indexOf(value);
       if (ind > -1) {
         this.props.filters[filterType].splice(ind, 1);
         tempFilters = this.props.filters;
       } else {
-        tempFilters[filterType] = [value];
+        if (tempFilters[filterType].length == 0) {
+          tempFilters[filterType] = [value];
+        } else {
+          tempFilters[filterType].push(value);
+        }
       }
     } else {
       tempFilters[filterType] = [value];
@@ -39,17 +43,24 @@ class Filters extends React.Component {
         }
         var meal;
         if (tempFilters.mealTime) {
-          if (tempFilters.mealTime.indexOf("brunch") > -1) {
+          if (tempFilters.mealTime.indexOf("brunch") > -1 && r.brunch) {
             meal = true;
           }
-          if (tempFilters.mealTime.indexOf("lunch") > -1) {
+          if (tempFilters.mealTime.indexOf("lunch") > -1 && r.lunch) {
             meal = true;
           }
-          if (tempFilters.mealTime.indexOf("dinner") > -1) {
+          if (tempFilters.mealTime.indexOf("dinner") > -1 && r.dinner) {
             meal = true;
           }
         }
-        return toReturn && meal;
+
+        return tempFilters.mealTime && tempFilters.price
+          ? toReturn && meal
+          : tempFilters.mealTime
+            ? meal
+            : tempFilters.price
+              ? toReturn
+              : false;
       });
       this.props.setFilteredRestaurants(filtered);
     }
@@ -66,6 +77,7 @@ class Filters extends React.Component {
     return className;
   };
   resetFilters = () => {
+    this.props.setFilteredRestaurants([]);
     this.props.setFilters({});
   };
   render() {
