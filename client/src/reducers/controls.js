@@ -32,12 +32,12 @@ const hoveredRestaurant = (state = null, action) => {
       return state;
   }
 };
-const initialFilterState = {
+const getInitialFilterState = () => ({
   mealTime: [BRUNCH, LUNCH, DINNER],
   price: [DOLLAR1, DOLLAR2, DOLLAR3, DOLLAR4]
-};
+});
 
-const filters = (state = { ...initialFilterState }, action) => {
+const filters = (state = getInitialFilterState(), action) => {
   switch (action.type) {
     case SET_FILTERS:
       return action.payload.filters;
@@ -60,5 +60,5 @@ export {
   hoveredRestaurant,
   filters,
   filteredRestaurants,
-  initialFilterState
+  getInitialFilterState
 };
