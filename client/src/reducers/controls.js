@@ -37,7 +37,7 @@ const initialFilterState = {
   price: [DOLLAR1, DOLLAR2, DOLLAR3, DOLLAR4]
 };
 
-const filters = (state = initialFilterState, action) => {
+const filters = (state = { ...initialFilterState }, action) => {
   switch (action.type) {
     case SET_FILTERS:
       return action.payload.filters;
@@ -55,4 +55,10 @@ const filteredRestaurants = (state = null, action) => {
   }
 };
 
-export { displayMode, hoveredRestaurant, filters, filteredRestaurants };
+export {
+  displayMode,
+  hoveredRestaurant,
+  filters,
+  filteredRestaurants,
+  initialFilterState
+};

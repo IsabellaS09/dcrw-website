@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import "./Filters.scss";
 import { setFilters, setFilteredRestaurants } from "actions/controls";
+import { initialFilterState } from "reducers/controls";
 import StarRatingComponent from "react-star-rating-component";
 import MaterialIcon from "material-icons-react";
 
@@ -77,8 +78,7 @@ class Filters extends React.Component {
     return className;
   };
   resetFilters = () => {
-    this.props.setFilteredRestaurants([]);
-    this.props.setFilters({});
+    this.props.setFilters(initialFilterState);
   };
   render() {
     const { restaurants } = this.props;
@@ -148,7 +148,7 @@ class Filters extends React.Component {
         </div>
         <div className="filter-container reset-filter">
           <div className={`filter`} onClick={() => this.resetFilters()}>
-            Clear Filters
+            Reset Filters
           </div>
         </div>
       </div>
