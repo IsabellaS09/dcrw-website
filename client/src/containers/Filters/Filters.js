@@ -16,7 +16,7 @@ class Filters extends React.Component {
         this.props.filters[filterType].splice(ind, 1);
         tempFilters = this.props.filters;
       } else {
-        if (tempFilters[filterType].length == 0) {
+        if (tempFilters[filterType].length === 0) {
           tempFilters[filterType] = [value];
         } else {
           tempFilters[filterType].push(value);

@@ -34,25 +34,31 @@
             background: #1C3144;
         }
     }
+    .extraSpacing{
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
     .info-container {
         width: 100%;
         float: left;
         .cuisine{
             display: inline-block;
         }
-        .otherInfo{
-            display: inline-block;
-            vertical-align: top;
-        }
+    }
+    .otherInfo{
+        display: inline-block;
+        vertical-align: top;
+        margin-left:16px;
     }
     .logo {
-        height: 50px;
-        width: 50px;
+        height: 75px;
+        width: 75px;
         display: inline-block;
         background-size: contain;
         background-position: center;
         //border: 1px solid lightgrey;
         float: left;
+        display: inline-block;
     }
     .cuisine {
         display: flex;

@@ -14,7 +14,7 @@ const DISTANCE = "distance";
 class SideMenu extends React.Component {
   state = {
     sort: NAME,
-    desc: true
+    asc: true
   };
 
   handleRestaurantMouseOver = id => {
@@ -22,27 +22,41 @@ class SideMenu extends React.Component {
   };
 
   handleSort = sort => {
-    this.setState({ sort });
+    var order = this.state.asc;
+    if (this.state.sort == sort) {
+      order = !order;
+    } else {
+      order = true;
+    }
+    this.setState({ sort, asc: order });
   };
 
-  compareRestaurants = (a, b, sort, desc) => {
+  compareRestaurants = (a, b, sort, asc) => {
     if (typeof a[sort] === "undefined" || typeof b[sort] === "undefined") {
       return 0;
     }
-    if (isNaN(a[sort]) || isNaN(b[sort])) {
-      return a[sort].localeCompare(b[sort]);
+    if (asc) {
+      if (isNaN(a[sort]) || isNaN(b[sort])) {
+        return a[sort].localeCompare(b[sort]);
+      } else {
+        return (10 * a[sort] - 10 * b[sort]) / 10;
+      }
     } else {
-      console.log("number");
-      return a[sort] - b[sort];
+      if (isNaN(a[sort]) || isNaN(b[sort])) {
+        return b[sort].localeCompare(a[sort]);
+      } else {
+        return (10 * b[sort] - 10 * a[sort]) / 10;
+      }
     }
   };
 
   render() {
     const { restaurants, filteredRestaurants } = this.props;
-    const { sort } = this.state;
+    const { sort, asc } = this.state;
     var restaurantsToMap = filteredRestaurants
       ? filteredRestaurants
       : restaurants;
+
     return (
       <div className="SideMenu">
         <div className="header-wrapper">
@@ -77,7 +91,7 @@ class SideMenu extends React.Component {
         <div className="restaurants-list">
           {restaurantsToMap &&
             restaurantsToMap
-              .sort((a, b) => this.compareRestaurants(a, b, sort))
+              .sort((a, b) => this.compareRestaurants(a, b, sort, asc))
               .map(r => {
                 const id = getRestaurantID(r);
                 return (
